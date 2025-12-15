@@ -1,0 +1,31 @@
+File & Directory Operations :-
+=============================
+
+hdfs dfs -ls / → List files in root directory
+
+hdfs dfs -ls -R / → Recursively list all files
+
+hdfs dfs -mkdir /user/test → Create a new directory
+
+hdfs dfs -mkdir -p /user/test/input → Create parent directories as needed
+
+hdfs dfs -rmdir /user/test → Remove an empty directory
+
+hdfs dfs -rm -r /user/test → Delete a directory and its contents
+
+hdfs dfs -mv /user/old /user/new → Move files/directories
+
+hdfs dfs -cp /user/data/file1 /user/data/file2 → Copy files/directories
+
+File Upload & Download
+======================
+
+hdfs dfs -put localfile /user/hadoop/ → Upload file from local to HDFS
+
+hdfs dfs -put -f localfile /user/hadoop/ → Force overwrite if exists
+
+hdfs dfs -copyFromLocal localfile /user/hadoop/ → Same as put
+
+hdfs dfs -get /user/hadoop/file localfile → Download file from HDFS
+
+hdfs dfs -copyToLocal /user/hadoop/file ./ → Same as get
