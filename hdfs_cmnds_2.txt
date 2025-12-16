@@ -1,0 +1,119 @@
+File & Directory Operations :-
+=============================
+
+hdfs dfs -ls / → List files in root directory
+
+hdfs dfs -ls -R / → Recursively list all files
+
+hdfs dfs -mkdir /user/test → Create a new directory
+
+hdfs dfs -mkdir -p /user/test/input → Create parent directories as needed
+
+hdfs dfs -rmdir /user/test → Remove an empty directory
+
+hdfs dfs -rm -r /user/test → Delete a directory and its contents
+
+hdfs dfs -mv /user/old /user/new → Move files/directories
+
+hdfs dfs -cp /user/data/file1 /user/data/file2 → Copy files/directories
+
+File Upload & Download
+======================
+
+hdfs dfs -put localfile /user/hadoop/ → Upload file from local to HDFS
+
+hdfs dfs -put -f localfile /user/hadoop/ → Force overwrite if exists
+
+hdfs dfs -copyFromLocal localfile /user/hadoop/ → Same as put
+
+hdfs dfs -get /user/hadoop/file localfile → Download file from HDFS
+
+hdfs dfs -copyToLocal /user/hadoop/file ./ → Same as get
+
+hdfs dfs -getmerge /user/hadoop/input local_merged.txt → Merge multiple HDFS files into one local file
+
+File Viewing & Reading:-
+=========================
+
+hdfs dfs -cat /user/hadoop/file.txt → Display file content
+
+hdfs dfs -tail /user/hadoop/file.txt → Show last 1 KB of a file
+
+hdfs dfs -text /user/hadoop/file.gz → Display compressed file as text
+
+hdfs dfs -head /user/hadoop/file.txt → Show first 1 KB of a file
+
+hdfs dfs -count /user/hadoop/ → Count directories, files, and bytes
+
+hdfs dfs -du -h /user/hadoop/ → Disk usage (human-readable)
+
+Permissions & Ownership:-
+=========================
+
+hdfs dfs -chmod 755 /user/hadoop/file → Change permissions
+
+
+Admin & Maintenance:-
+=======================
+
+hdfs dfsadmin -report → HDFS cluster report (capacity, nodes, usage)
+
+hdfs dfsadmin -safemode get → Check safemode status
+
+hdfs dfsadmin -safemode enter → Enter safemode
+
+hdfs dfsadmin -safemode leave → Exit safemode
+
+hdfs dfsadmin -refreshNodes → Refresh datanodes
+
+hdfs fsck / → Check health of HDFS
+
+hdfs fsck / -files -blocks -locations → Detailed HDFS file/block report
+
+Archiving & Advanced :-
+======================
+
+hdfs dfs -setrep -R 3 /user/hadoop/data → Change replication factor
+
+hdfs dfs -touchz /user/hadoop/emptyfile → Create empty file
+
+hdfs dfs -setrep -R 1 /data/Untitled.ipynb
+
+
+
+hadoop distcp \
+  -update \
+  -overwrite \
+  -delete \
+  -skipcrccheck \
+  -m 20 \
+  hdfs://src-namenode:8020/user/source_dir \
+  hdfs://dest-namenode:8020/user/target_dir
+
+
+hadoop distcp /data/dummy.json hdfs://dest-namenode:8020/data/cdf/archive/
+
+
+bath or NRT ---> bath cluster ---> we need to excute on bath cluster 
+
+
+in real time we will 2 name nodes ---> 
+
+
+
+
+-update	 =======> Copies only changed or new files (based on file size and modification time).
+-overwrite   ===>	Overwrites destination files even if they exist.
+-delete	Deletes=> files in the destination that don't exist in the source.
+-skipcrccheck ==>	Skips checksum check (faster but may be risky).
+-m 20	  ======> Uses 20 map tasks for parallel copy. Adjust based on cluster size. (file level parllel process)
+
+
+hadoop distcp \
+  -update \
+  -overwrite \
+  -delete \
+  -skipcrccheck \
+  -m 20 \
+  hdfs://src-namenode:8020/user/source_dir \
+  hdfs://dest-namenode:8020/user/target_dir
